@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Conexión C++ y HTML</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <h1>Conexión entre C++ y HTML</h1>
+    <form id="miFormulario">
+        <input type="text" id="nombre" placeholder="Introduce tu nombre" required> <!-- Campo de nombre -->
+        <button type="submit">Enviar</button>
+    </form>
+    <div id="resultado"></div>
+
+    <script>
+        document.getElementById('miFormulario').onsubmit = async function (e) {
+            e.preventDefault();
+
+            nombre = document.getElementById('nombre').value;
+
+            response = await fetch(`/cgi-bin/funciones.cgi?nombre=${nombre}`); // Enviar el nombre
+            data = await response.text();
+            document.getElementById('resultado').innerText = `Resultado: ${data}`;
+        };
+    </script>
+</body>
+</html>
